@@ -9,11 +9,12 @@ from rest_framework.views import APIView
 from .serializer import *
 from rest_framework import status
 from .permissions import IsAdminOrReadOnly
-
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+@login_required(login_url='/accounts/login')
 def home(request):
     date = dt.date.today()
     heading = "Welcome to Awward Application"
     Projects = Projects.objects.all()
-    return render(request, 'home.html', {"date":date, "heading":heading, "projects":projects})
+    return render(request, 'all-awwards/home.html', {"date":date, "heading":heading, "projects":projects})
