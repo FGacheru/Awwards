@@ -19,3 +19,13 @@ def home(request):
     heading = "Welcome to Awward Application"
     projects = Projects.objects.all()
     return render(request, 'all-awwards/home.html', {"date":date, "heading":heading, "projects":projects})
+
+def project(request, id):
+
+    try:
+        project = Projects.objects.get(pk = id)
+        
+    except ObjectDoesNotExist:
+        raise Http404()    
+    
+    return render(request, "all-awwards/project.html", {"project":project})
