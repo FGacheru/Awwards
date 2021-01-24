@@ -20,6 +20,7 @@ def home(request):
     projects = Projects.objects.all()
     return render(request, 'all-awwards/home.html', {"date":date, "heading":heading, "projects":projects})
 
+@login_required(login_url='/accounts/login')
 def project(request, id):
 
     try:
@@ -29,3 +30,18 @@ def project(request, id):
         raise Http404()    
     
     return render(request, "all-awwards/project.html", {"project":project})
+
+@login_required(login_url='/accounts/login/')
+def upload_form(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = NewProjectForm(request.POST, request.FILES)
+        if form.is_valid():
+            project = form.save(commit=False)
+            project.author = current_user
+            project.save()
+        return redirect('home')
+
+    else:
+        form = NewProjectForm()
+    return render(request, 'all-awwards/upload_project.html', {"form":form})
