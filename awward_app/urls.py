@@ -5,7 +5,8 @@ from . import views
 
 urlpatterns = [
     path(r'',views.home,name='home'),
-    url(r'^project/$',views.project,name ='project'),
+    path(r'^project/$',views.project,name ='project'),
+    path(r'^upload_form/$',views.project,name ='new_project'),
     
     
     
