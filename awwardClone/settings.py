@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 import os
 from pathlib import Path
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -134,3 +137,16 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     )
 }
+
+cloudinary.config( 
+  cloud_name = "car-rental", 
+  api_key = "736146969771828", 
+  api_secret = "UbOlMD5ANCUTHphIxf2TICAYDJA" 
+)
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+LOGOUT_REDIRECT_URL = 'register'
+
+LOGIN_REDIRECT_URL = 'home'

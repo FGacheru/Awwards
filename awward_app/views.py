@@ -4,6 +4,7 @@ import datetime as dt
 from django.contrib.auth.decorators import login_required
 from .models import *
 from .forms import *
+from django.contrib.auth.forms import UserCreationForm
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializer import *
@@ -16,5 +17,5 @@ from django.contrib.auth.decorators import login_required
 def home(request):
     date = dt.date.today()
     heading = "Welcome to Awward Application"
-    Projects = Projects.objects.all()
+    projects = Projects.objects.all()
     return render(request, 'all-awwards/home.html', {"date":date, "heading":heading, "projects":projects})
