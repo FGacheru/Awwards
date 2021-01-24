@@ -4,7 +4,9 @@ from django .urls import path
 from . import views
 
 urlpatterns = [
-    path(r'',views.home,name='home')
+    path(r'',views.home,name='home'),
+    url(r'^project/$',views.project,name ='project'),
+    
     
     
 ]
