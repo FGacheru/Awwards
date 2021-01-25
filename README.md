@@ -8,17 +8,24 @@
 ## Description
 The application will allows a user to post a project he/she has created and get it reviewed by his/her peers.
 
-   |
+
+As a user of the web application you will be able to:
+
+1. Sign up and log in
+2. View projects posted by other users
+3. Post projects
+4. Rate a project
+5. Edit your profile
+6. Generate APIs
 
 
 | Behavior            | Input                         | Output                        | 
 | ------------------- | ----------------------------- | ----------------------------- |
-| Login	if already have an account |if you dont have , click on the sign up link and fill the form  | If login is successful, user is navigated to home page | 
-| Edit profile | On the account link, click on the  update profile | Redirected to the home page |
+| Login	if already have an account |if you dont have , click on the sign up link and fill the form  | If login is successful, user is navigated to home page | Click on `Comment` | Taken to where you can comment | Signs In/ Signs Up |
 | Click on profile | Redirects to the profile page | User adds bio and profile picture |
-|Comment and like on a post|Click on the comment and like icon and add a comment and like|The comment and like will be added to the post's
-|Add a new post|Click on the New Profile icon to be redirected to the new post form|the post will be rendered to the home page
+|Add a new project|Click on the add project icon to be redirected to the new post form|the post will be rendered to the home page
 | Click on log Out in the accounts| Redirects to the login form | Logs out user  |
+
 
 ## Setup and installations
 * Fork the data onto your own personal repository.
