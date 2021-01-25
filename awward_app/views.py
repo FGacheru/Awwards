@@ -49,17 +49,17 @@ def upload_project(request):
 def profile(request):
     current_user = request.user
     author = current_user
-    projects = Projects.author
+    projects = Projects.get_by_author(author)
     
-    if request.method =='POST':
+    if request.method == 'POST':
         form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
         if form.is_valid():
-            user_profile = form.save(commit=False)
-            user_profile.save()
-            
-        return redirect ('profile')
+            profile = form.save(commit=False)
+            profile.save()
+        return redirect('user_profile')
+        
     else:
-        form = ProfileForm()
+        form = ProfileForm()    
     return render(request, 'all-awwards/profile.html', {"form":form, "projects":projects})
 
 
@@ -69,5 +69,5 @@ def search(request):
     parameter = request.GET.get("project")
     result = Projects.objects.filter(project_name__icontains=parameter)
     print(result)
-    return render(request, 'search.html', locals())
+    return render(request, 'all-awwards/search.html', locals())
         

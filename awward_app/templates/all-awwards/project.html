@@ -1,11 +1,8 @@
-{% extends 'base.html' %}
+
 {% load ratings %}
 {% load bootstrap3%}
 {% load static %}
-
 {% block content %}
-
-
 <div class="container" style="padding-top: 70px;">
   <div class="row mt-4"></div>
   <!-- Grid row -->
@@ -51,7 +48,7 @@
           </div>
           <div class="row">
             <div class="col-lg-6 dark-text">
-              <img src="{{ project_item.Author.photo.url }}" alt="" class="rounded-circle img-fluid mr-1" style="width: 40px;">
+              <img src="{{ project_item.author.image.url }}" alt="" class="rounded-circle img-fluid mr-1" style="width: 40px;">
               Posted By:{{project_item.author|upper}}<small><div class="col-lg-6 dark-text"> <small> Date Posted: {{project.pub_date|date:"d /m/Y"}} </small> </div>
             </div>
           </div>

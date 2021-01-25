@@ -19,8 +19,8 @@ from django.contrib.auth import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path(r'accounts/', include('django_registration.backends.one_step.urls')),
-    path(r'accounts/', include('django.contrib.auth.urls')),
+    path('accounts/', include('django_registration.backends.one_step.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
     path('',include('awward_app.urls')),
     path("logout", views.logout_then_login, name= "logout")
 ]

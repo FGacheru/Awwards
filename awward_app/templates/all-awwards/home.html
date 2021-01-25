@@ -1,61 +1,95 @@
-{%extends 'all-awwards/base.html'%}
-{% load bootstrap3 %}
 {%load static%}
-{% block content %}
-{{ block.super}}
-<!-- project section -->
-<div class="container-fluid">
-    <div class="mb-2 pb-2 pl-4 pr-2 ml-4 mr-1">
-        <h4 class="display-35 font-weight-bold"> Sites of the day</h4>:
-    </div>
-    <div class="row">
+{% load ratings %}
 
-        {% for project_item in projects %}
+<!DOCTYPE html>
+<html>
+<title>Awards</title>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+<link rel="stylesheet" href="static 'css/styles.css'">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    body,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: "Raleway", sans-serif
+    }
+</style>
 
-        <div class="col-md-4">
-            <div class="card-deck">
-                <div class="card mb-2 mt-2 ">
-                    <!-- Card image -->
-                    <div class="view overlay zoom image2">
-                        {% if project_item.project_image %}
-                        <a href="/project/{{project_item.id}}">
-                            <img class="card-img-top" src="{{project_item.project_image.url}}"
-                                alt="{{ project_item.project_name }}" height="300px" width="320">
-                        </a>
-                        {% else %}
-                        <a href="/project/{{project_item.id}}">
-                            <img class="card-img-top" src="https://source.unsplash.com/1600x900/?fun,vacation"
-                                alt="{{ project_item.project_name }}">
-                        </a>
-                        {% endif %}
-                    </div>
-
-                    <div class="card-body pr-2 pl-2 pr-2 mr-2">
-                        <h5 class="card-title ml-4">{{ project_item.project_title }}</h5>
-                        <div class="row ml-2">
-                            <div class="col-lg-6 dark-text">
-                                <small class="text-muted ml-2"><img src="{{ project_item.Author.profile.photo.url }}"
-                                        alt="" class="rounded-circle img-fluid mr-1" style="width: 30px;">
-                                    posted By: {{project_item.author|upper}} </small>
-                                <small> <span class="mr-1"> From {{project_item.country.name}}</span>
-                                </small> </div>
-                            <div class="col-lg-6 dark-text d-flex justify-content-end"> <small>
-                                    {{project_item.pub_date|date:"d /m/Y"}} </small></div>
-
-                        </div>
-                    </div>
-                </div>
+<body class="w3-light-grey w3-content" style="max-width:1600px">
+    <!-- !PAGE CONTENT! -->
+    <div class="w3-main" ">
+        <div class="w3-bar w3-black">
+            <a href="{%url 'home'%}" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-te"><i
+            class="fa fa-home fa-fw w3-margin-right"></i>Home</a>
+            <a href="{%url 'user_profile'%}" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i
+            class="fa fa-user fa-fw w3-margin-right" ></i>Profile</a>
+            <a href="/logout" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i
+            class="fa fa-sign-out fa-fw w3-margin-right"></i>Logout</a>
+            <form role="search" class="w3-hide-small" action="{%url 'search'%}">
+                    <input type="text" name="project"
+                        class="w3-bar-item w3-input w3-white w3-padding-large  w3-right"
+                        placeholder="Search and hit enter...">
+                </form>
+            </div>
 
             </div>
-            <!-- end of card deck  -->
+            </div>
         </div>
-        {% endfor %}
+        <!-- First Photo Grid-->
+        <div class="w3-row-padding">
+            <h4 class="w3-center">Projects</h4>
+            <!-- <h4 class="" style="padding: 0px 0px 0px 50px;">Sites of the day:</h4> -->
+            <div class="col-6-md""w3-center"><a class="w3-button w3-round w3-brown" href="{%url 'new_project'%}"><b>+ </b>Post a Project</a>
+            <h4 class="w3-center">View and Rate Projects</h4>
+            {% for project in projects %}
+            <div class="w3-third w3-container w3-margin-bottom ">
+                <div class="row">
+                    <a href="{%url 'project'}"><img src="{{project.image.url}}"
+                            alt="image" style="width:100%" class="w3-hover-opacity"
+                            title="Click to view more details"></a>
+                    <div class="w3-container w3-white w3-card">
+                        <p><b>Project Name: {{project.project_name}}</b></p>
+                        <p>Description: {{project.description}}</p>
 
-    </div>
-</div>
+                        <button class="btn btn-inf"><a href="{{project.url}}" >View site</a></button>
+                        <p> Owner : {{project.author}}</p>
+                        <div class="w3-center "></div>
+                        <p>{% ratings project %}         </p>
+                    </div>
+                </div>
+            </div>
+            {%endfor%}
+            <!-- End page content -->      
 
-{% endblock %}
-{% block scripts %}
-{{ block.super }}
-<script type="text/javascript" src="{% static 'js/script.js' %}"></script>
-{% endblock %}
+        <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
+        <script>
+            // Script to open and close sidebar
+            function w3_open() {
+                document.getElementById("mySidebar").style.display = "block";
+                document.getElementById("myOverlay").style.display = "block";
+            }
+
+            function w3_close() {
+                document.getElementById("mySidebar").style.display = "none";
+                document.getElementById("myOverlay").style.display = "none";
+            }
+
+        </script>
+
+        <style>
+            
+        </style>
+
+</body>
+
+</html>
