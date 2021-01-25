@@ -20,3 +20,19 @@ class ProfileTest(TestCase):
         self.frank.delete_profile()
         all_profiles = Profile.objects.all()
         self.assertEqual(len(all_profiles),0)
+        
+        
+class ProjectTestCase(TestCase):
+    def setUp(self):
+        self.new_post = Projects(title = 'testT',projectscreenshot = 'test.jpg',description = 'testD',user = frank,projecturl = 'https://test.com',datecreated='Jan,25.2021')
+
+
+    def test_save_project(self):
+        self.new_post.save_project()
+        pictures = Image.objects.all()
+        self.assertEqual(len(pictures),1)
+
+    def test_delete_project(self):
+        self.new_post.delete_project()
+        pictures = Projects.objects.all()
+        self.assertEqual(len(pictures),1
