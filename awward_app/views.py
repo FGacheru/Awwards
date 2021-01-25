@@ -49,18 +49,19 @@ def upload_project(request):
 def profile(request):
     current_user = request.user
     author = current_user
-    projects = Projects.get_by_author(author)
+    profile = Profile.objects.filter(user_id=current_user).first()
     
     if request.method == 'POST':
         form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
         if form.is_valid():
             profile = form.save(commit=False)
+            profile.user = current_user
             profile.save()
         return redirect('user_profile')
         
     else:
         form = ProfileForm()    
-    return render(request, 'all-awwards/profile.html', {"form":form, "projects":projects})
+    return render(request, 'all-awwards/profile.html', {"form":form, "profile":profile})
 
 
 @login_required(login_url='/accounts/login')
